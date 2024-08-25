@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CotizaciónCumplimiento</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<div id="cotizadorPrincipal" class="container">
+
+        <div class="button-container-cotizadores">
+            <button id="openCotizador2">Ingenio Cauca - Providencia</button>
+            <button id="openCotizador3">Ingenio Risaralda</button>
+            <div class="clave">
+                <input type="password" id="claveInput" placeholder="Clave de Area Técnica">
+                <button type="button" id="toggleClave" class="toggle-clave">
+                    <span id="eyeIcon" class="eye-icon">👁️</span>
+                </button>
+            </div>
+        </div>
+
+    	<div class="header-container">
+    		<h1>COTIZACIÓN<br>RAMO CUMPLIMIENTO Y RCE</h1>
+    		<img src="IMG/logo1.png" alt="Logo Superior Derecho" class="logo-top-right">
+	    </div>
+        <img src="IMG/logo2.png" alt="Logo Inferior Centro" class="logo-bottom-center">
+
+        <form id="fechaForm">
+            <div class="form-group-inline">
+                <label for="desde">Fecha Inicial:</label>
+                <input type="date" id="desde" name="desde" required>
+                <label for="dias">Número de Días:</label>
+                <input type="number" id="dias" name="dias" required>
+                <label for="hasta">Fecha Final:</label>
+                <input type="date" id="hasta" name="hasta">
+            </div>
+            <div class="form-group">
+                <label for="valorContrato">Valor del Contrato ($):</label>
+                <input type="number" id="valorContrato" name="valorContrato" max="300000000" required>
+            </div>
+
+        <!--Nueva tabla de campos -->
+        <table class="form-table">
+            <thead>
+                <tr>
+                    <th>Garantía</th>
+                    <th>%</th>
+                    <th>Valor de la Garantía</th>
+                    <th>Fecha Inicial</th>
+                    <th>Fecha Final</th>
+                    <th>Días</th>
+                    <th>Tasa</th>
+                    <th>Prima</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+                <tbody id="garantiaTableBody">
+                <!-- Fila 1 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia1" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje1" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia1" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial1" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia1" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia1" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa1" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima1" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+                <!-- Fila 2 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia2" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje2" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia2" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial2" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia2" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia2" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa2" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima2" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+                <!-- Fila 3 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia3" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje3" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia3" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial3" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia3" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia3" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa3" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima3" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+                <!-- Fila 4 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia4" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje4" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia4" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial4" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia4" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia4" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa4" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima4" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+                <!-- Fila 5 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia5" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje5" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia5" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial5" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia5" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia5" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa5" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima5" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+                <!-- Fila 6 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia6" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje6" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia6" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial6" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia6" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia6" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa6" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima6" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+                <!-- Fila 7 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia7" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje7" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia7" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial7" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia7" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia7" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa7" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima7" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+                <!-- Fila 8 -->
+                <tr class="garantia-row">
+                    <td data-label="Garantía">
+                        <select id="garantia8" name="garantia">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="seriedad">Seriedad</option>
+                            <option value="anticipo">Buen manejo del anticipo</option>
+                            <option value="pagoanticipado">Pago anticipado</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="calidaddelosbienes">Calidad de los bienes</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje8" name="porcentaje" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia8" name="valorGarantia"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial8" name="fechaInicialGarantia"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia8" name="fechaFinalGarantia"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia8" name="diasGarantia"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa8" name="tasa" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima8" name="prima"></td>
+                    <td><button type="button" class="remove-row">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button" id="addRow">Añadir Garantía</button>
+
+		<!-- Campos de Totales -->
+		<div class="total-group">
+            <label for="totalPrima">Prima</label>
+            <label for="gastosExpedicion">Gastos de Expedición</label>
+            <label for="iva">IVA (19%)</label>
+            <label for="total">Total Prima</label>
+            
+            <input type="number" id="totalPrima" name="totalPrima" readonly>
+            <input type="number" id="gastosExpedicion" name="gastosExpedicion" value="10000" readonly>
+            <input type="number" id="iva" name="iva" readonly>
+            <input type="number" id="total" name="total" readonly>
+        </div>
+		</form>
+
+        <button id="imprimir" class="no-print" onclick="window.print()">Imprimir Cotizacón</button>
+    </div>
+
+    <!-- COTIZADOR DOS / INGENIO CAUCA & PROVIDENCIA -->
+    <div id="cotizadorDos" class="container">
+        <button id="volverPrincipal">Volver a Cotizador Principal</button>
+
+        <div class="header-container">
+            <h2>COTIZACIÓN INGENIO INCAUCA/PROVIDENCIA<br>RAMO CUMPLIMIENTO Y RCE</h2>
+            <img src="IMG/logo1.png" alt="Logo Superior Derecho" class="logo-top-right">
+        </div>
+
+        <img src="IMG/logo2.png" alt="Logo Inferior Centro" class="logo-bottom-center">
+
+        <form id="fechaForm">
+            <div class="form-group-inline">
+                <label for="desde2">Fecha Inicial:</label>
+                <input type="date" id="desde2" name="desde2" required>
+                <label for="dias2">Número de Días:</label>
+                <input type="number" id="dias2" name="dias2" required>
+                <label for="hasta2">Fecha Final:</label>
+                <input type="date" id="hasta2" name="hasta2">
+            </div>
+            <div class="form-group">
+                <label for="valorContrato2">Valor del Contrato ($):</label>
+                <input type="number" id="valorContrato2" name="valorContrato2" max="300000000" required>
+            </div>
+            
+        <!--Nueva tabla de campos -->
+        <table class="form-table">
+            <thead>
+                <tr>
+                    <th>Garantía</th>
+                    <th>%</th>
+                    <th>Valor de la Garantía</th>
+                    <th>Fecha Inicial</th>
+                    <th>Fecha Final</th>
+                    <th>Días</th>
+                    <th>Tasa</th>
+                    <th>Prima</th>
+                </tr>
+            </thead>
+                <tbody id="garantiaTableBody">
+                <!-- Fila 1 -->
+                <tr class="garantia-row-2">
+                    <td data-label="Garantía">
+                        <select id="garantia1" name="garantia2">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje2" name="porcentaje2" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia2" name="valorGarantia2"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial2" name="fechaInicialGarantia2"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia2" name="fechaFinalGarantia2"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia2" name="diasGarantia2"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa2" name="tasa2" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima2" name="prima2"></td>
+                </tr>
+                <!-- Fila 2 -->
+                <tr class="garantia-row-2">
+                    <td data-label="Garantía">
+                        <select id="garantia2" name="garantia2">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje2" name="porcentaje2" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia2" name="valorGarantia2"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial2" name="fechaInicialGarantia2"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia2" name="fechaFinalGarantia2"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia2" name="diasGarantia2"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa2" name="tasa2" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima2" name="prima2"></td>
+                </tr>
+                <!-- Fila 3 -->
+                <tr class="garantia-row-2">
+                    <td data-label="Garantía">
+                        <select id="garantia3" name="garantia2">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje2" name="porcentaje2" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia2" name="valorGarantia2"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial2" name="fechaInicialGarantia2"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia2" name="fechaFinalGarantia2"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia2" name="diasGarantia2"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa2" name="tasa2" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima2" name="prima2"></td>
+                </tr>
+                <!-- Fila 4 -->
+                <tr class="garantia-row-2">
+                    <td data-label="Garantía">
+                        <select id="garantia4" name="garantia2">
+                            <option value="">Seleccione una garantía</option>
+                            <option value="cumplimiento">Cumplimiento</option>
+                            <option value="calidadServicio">Calidad del servicio</option>
+                            <option value="salarios">Salarios y prestaciones sociales</option>
+                            <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        </select>
+                    </td>
+                    <td data-label="%"><input type="number" id="porcentaje2" name="porcentaje2" step="0.01" min="0" max="100"></td>
+                    <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia2" name="valorGarantia2"></td>
+                    <td data-label="Fecha Inicial"><input type="date" id="fechaInicial2" name="fechaInicialGarantia2"></td>
+                    <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia2" name="fechaFinalGarantia2"></td>
+                    <td data-label="Días"><input type="number" id="diasGarantia2" name="diasGarantia2"></td>
+                    <td data-label="Tasa"><input type="number" id="tasa2" name="tasa2" step="0.01" min="0"></td>
+                    <td data-label="Prima"><input type="number" id="prima2" name="prima2"></td>
+                </tr>
+            </tbody>
+        </table>
+
+		<!-- Campos de Totales -->
+		<div class="total-group">
+            <label for="totalPrima2">Prima</label>
+            <label for="gastosExpedicion2">Gastos de Expedición</label>
+            <label for="iva2">IVA (19%)</label>
+            <label for="total2">Total Prima</label>
+            
+            <input type="number" id="totalPrima2" name="totalPrima2" readonly>
+            <input type="number" id="gastosExpedicion2" name="gastosExpedicion2" value="10000" readonly>
+            <input type="number" id="iva2" name="iva2" readonly>
+            <input type="number" id="total2" name="total2" readonly>
+        </div>
+    </form>
+
+    <button id="imprimir" class="no-print" onclick="window.print()">Imprimir Cotizacón</button>
+    </div>
+
+    <!-- COTIZADOR TRES / INGENIO RISARALDA -->
+    <div id="cotizadorTres" class="container">
+    
+    <button id="volverPrincipal3">Volver a Cotizador Principal</button>
+
+    <div class="header-container">
+        <h3>COTIZACIÓN INGENIO RISARALDA<br>RAMO CUMPLIMIENTO Y RCE</h3>
+        <img src="IMG/logo1.png" alt="Logo Superior Derecho" class="logo-top-right">
+    </div>
+
+    <img src="IMG/logo2.png" alt="Logo Inferior Centro" class="logo-bottom-center">
+
+    <form id="fechaForm">
+        <div class="form-group-inline">
+            <label for="desde3">Fecha Inicial:</label>
+            <input type="date" id="desde3" name="desde3" required>
+            <label for="dias2">Número de Días:</label>
+            <input type="number" id="dias3" name="dias3" required>
+            <label for="hasta3">Fecha Final:</label>
+            <input type="date" id="hasta3" name="hasta3">
+        </div>
+        <div class="form-group">
+            <label for="valorContrato3">Valor del Contrato ($):</label>
+            <input type="number" id="valorContrato3" name="valorContrato3" max="300000000" required>
+        </div>
+        
+    <!--Nueva tabla de campos -->
+    <table class="form-table">
+        <thead>
+            <tr>
+                <th>Garantía</th>
+                <th>%</th>
+                <th>Valor de la Garantía</th>
+                <th>Fecha Inicial</th>
+                <th>Fecha Final</th>
+                <th>Días</th>
+                <th>Tasa</th>
+                <th>Prima</th>
+            </tr>
+        </thead>
+            <tbody id="garantiaTableBody">
+            <!-- Fila 1 -->
+            <tr class="garantia-row-3">
+                <td data-label="Garantía">
+                    <select id="garantia1" name="garantia3">
+                        <option value="">Seleccione una garantía</option>
+                        <option value="cumplimiento">Cumplimiento</option>
+                        <option value="calidadServicio">Calidad del servicio</option>
+                        <option value="salarios">Salarios y prestaciones sociales</option>
+                        <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </td>
+                <td data-label="%"><input type="number" id="porcentaje3" name="porcentaje3" step="0.01" min="0" max="100"></td>
+                <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia3" name="valorGarantia3"></td>
+                <td data-label="Fecha Inicial"><input type="date" id="fechaInicial3" name="fechaInicialGarantia3"></td>
+                <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia3" name="fechaFinalGarantia3"></td>
+                <td data-label="Días"><input type="number" id="diasGarantia3" name="diasGarantia3"></td>
+                <td data-label="Tasa"><input type="number" id="tasa3" name="tasa3" step="0.01" min="0"></td>
+                <td data-label="Prima"><input type="number" id="prima3" name="prima3"></td>
+            </tr>
+            <!-- Fila 2 -->
+            <tr class="garantia-row-3">
+                <td data-label="Garantía">
+                    <select id="garantia2" name="garantia3">
+                        <option value="">Seleccione una garantía</option>
+                        <option value="cumplimiento">Cumplimiento</option>
+                        <option value="calidadServicio">Calidad del servicio</option>
+                        <option value="salarios">Salarios y prestaciones sociales</option>
+                        <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </td>
+                <td data-label="%"><input type="number" id="porcentaje3" name="porcentaje3" step="0.01" min="0" max="100"></td>
+                <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia3" name="valorGarantia3"></td>
+                <td data-label="Fecha Inicial"><input type="date" id="fechaInicial3" name="fechaInicialGarantia3"></td>
+                <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia3" name="fechaFinalGarantia3"></td>
+                <td data-label="Días"><input type="number" id="diasGarantia3" name="diasGarantia3"></td>
+                <td data-label="Tasa"><input type="number" id="tasa3" name="tasa3" step="0.01" min="0"></td>
+                <td data-label="Prima"><input type="number" id="prima3" name="prima3"></td>
+            </tr>
+            <!-- Fila 3 -->
+            <tr class="garantia-row-3">
+                <td data-label="Garantía">
+                    <select id="garantia3" name="garantia3">
+                        <option value="">Seleccione una garantía</option>
+                        <option value="cumplimiento">Cumplimiento</option>
+                        <option value="calidadServicio">Calidad del servicio</option>
+                        <option value="salarios">Salarios y prestaciones sociales</option>
+                        <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </td>
+                <td data-label="%"><input type="number" id="porcentaje3" name="porcentaje3" step="0.01" min="0" max="100"></td>
+                <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia3" name="valorGarantia3"></td>
+                <td data-label="Fecha Inicial"><input type="date" id="fechaInicial3" name="fechaInicialGarantia3"></td>
+                <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia3" name="fechaFinalGarantia3"></td>
+                <td data-label="Días"><input type="number" id="diasGarantia3" name="diasGarantia3"></td>
+                <td data-label="Tasa"><input type="number" id="tasa3" name="tasa3" step="0.01" min="0"></td>
+                <td data-label="Prima"><input type="number" id="prima3" name="prima3"></td>
+            </tr>
+            <!-- Fila 4 -->
+            <tr class="garantia-row-3">
+                <td data-label="Garantía">
+                    <select id="garantia4" name="garantia3">
+                        <option value="">Seleccione una garantía</option>
+                        <option value="cumplimiento">Cumplimiento</option>
+                        <option value="calidadServicio">Calidad del servicio</option>
+                        <option value="salarios">Salarios y prestaciones sociales</option>
+                        <option value="responsabilidadCivil">Responsabilidad Civil</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </td>
+                <td data-label="%"><input type="number" id="porcentaje3" name="porcentaje3" step="0.01" min="0" max="100"></td>
+                <td data-label="Valor de la Garantía"><input type="number" id="valorGarantia3" name="valorGarantia3"></td>
+                <td data-label="Fecha Inicial"><input type="date" id="fechaInicial3" name="fechaInicialGarantia3"></td>
+                <td data-label="Fecha Final"><input type="date" id="fechaFinalGarantia3" name="fechaFinalGarantia3"></td>
+                <td data-label="Días"><input type="number" id="diasGarantia3" name="diasGarantia3"></td>
+                <td data-label="Tasa"><input type="number" id="tasa3" name="tasa3" step="0.01" min="0"></td>
+                <td data-label="Prima"><input type="number" id="prima3" name="prima3"></td>
+            </tr>
+        </tbody>
+    </table>  
+
+		<!-- Campos de Totales -->
+		<div class="total-group">
+            <label for="totalPrima3">Prima</label>
+            <label for="gastosExpedicion3">Gastos de Expedición</label>
+            <label for="iva3">IVA (19%)</label>
+            <label for="total3">Total Prima</label>
+            
+            <input type="number" id="totalPrima3" name="totalPrima3" readonly>
+            <input type="number" id="gastosExpedicion3" name="gastosExpedicion3" value="10000" readonly>
+            <input type="number" id="iva3" name="iva3" readonly>
+            <input type="number" id="total3" name="total3" readonly>
+        </div>
+    </form>
+
+    <button id="imprimir" class="no-print" onclick="window.print()">Imprimir Cotizacón</button>
+</div>
+
+<div class="print-footer">
+    <p><strong>AVISO IMPORTANTE</strong></p><br>
+    <p>La validez de la presente cotización está sujeta a la autorización final por parte de la compañía de seguros, después de una revisión detallada del contrato.</p>
+</div>
+
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+    <script src="script3.js"></script>
+
+</body>
+</html>

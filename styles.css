@@ -1,0 +1,608 @@
+/* Reseteo de estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    font-family: Verdana, sans-serif;
+    background-color: #f4f4f4;
+    color: #000000;
+    position: relative;
+}
+
+/* Contenedor del encabezado */
+.header-container {
+    display: flex;
+    justify-content: center; /* Centra el título horizontalmente */
+    align-items: center; /* Centra el título verticalmente */
+    position: relative;
+    height: 150px; /* Ajusta la altura según sea necesario */
+    padding: 0 20px; /* Añade algo de padding para que el logo no quede pegado al borde */
+}
+
+/* Contenedor principal */
+.container {
+    max-width: 1100px; /* Asegúrate de que este valor sea adecuado para la resolución de la pantalla */
+    margin: 0 auto; /* Esto centra el contenedor horizontalmente */
+    padding: 10px 40px; /* Asegúrate de que el padding no desplace el contenedor */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative; /* Necesario para el posicionamiento absoluto de los logos */
+    overflow: hidden; /* Esto oculta el contenido que se sale del contenedor */
+    /* Añade espacio en la parte inferior para el aviso de validez */
+    padding-bottom: 50mm; /* Ajusta este valor según sea necesario */
+}
+
+/* Estilo del título */
+h1 {
+    font-size: 28px; /* Ajusta el tamaño según lo que prefieras */
+    color: #001f3f; /* Azul naval */
+    font-family: 'Arial', sans-serif; /* Reemplaza 'TuFuentePreferida' con la fuente que elijas */
+    text-align: center; /* Centra el texto horizontalmente */
+    margin: 0; /* Elimina el margen por defecto */
+}
+
+h2 {
+    font-size: 22px; /* Ajusta el tamaño según lo que prefieras */
+    color: #4BA3C3; /* Azul naval */
+    font-family: 'Arial', sans-serif; /* Reemplaza 'TuFuentePreferida' con la fuente que elijas */
+    text-align: center; /* Centra el texto horizontalmente */
+    margin: 0; /* Elimina el margen por defecto */
+}
+
+h3 {
+    font-size: 22px; /* Ajusta el tamaño según lo que prefieras */
+    color: #004b22; /* Azul naval */
+    font-family: 'Arial', sans-serif; /* Reemplaza 'TuFuentePreferida' con la fuente que elijas */
+    text-align: center; /* Centra el texto horizontalmente */
+    margin: 0; /* Elimina el margen por defecto */
+}
+
+/* Estilos Fechas*/
+.form-group-inline {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.form-group-inline input {
+    flex:1;
+    padding: 3px;
+    font-size: 12px;
+    border: 1px solid #5e5e5e;
+    border-radius: 4px;
+}
+
+/*Estilos Valor Contrato*/
+.form-group, label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.form-group input {
+    width: 20%;
+    padding: 6px;
+    font-size: 12px;
+    border: 1px solid #5e5e5e;
+    border-radius: 4px;
+    margin-bottom: 18px;
+}
+
+/*Estilos tabla de Garantias*/
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.form-table th, .form-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 12px;
+}
+
+.form-table th {
+    background-color: #6498f9;
+    color: #ffffff;
+}
+
+.form-table input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/*Estilos Totales como tabla*/
+.total-group {
+    font-size: 12px;
+    font-weight: 500;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Crea 4 columnas de igual tamaño */
+    border-collapse: collapse; /* Asegura que los bordes se colapsen como en una tabla */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    margin-top: 100px; /* Espacio en la parte superior */
+    margin-bottom: 33px; /* Espacio en la parte inferior */
+}
+
+.total-group label, 
+.total-group input {
+    border: 1.3px solid #98bcfe; /* Borde alrededor de cada celda */
+    padding: 3px; /* Añade espacio dentro de cada celda */
+    text-align: center; /* Centra el texto en cada celda */
+}
+
+.total-group label {
+    background-color: #bcd3ff; /* Color de fondo para los títulos */
+}
+
+.total-group input {
+    background-color: #fff; /* Fondo blanco para los inputs */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho del input */
+}
+
+/*Estilos Boton Clave*/
+.clave {
+    position: absolute; /* Usa absolute si el contenedor tiene position: relative; */
+    right: 50px; /* Alinea el elemento al borde derecho */
+    top: 22px; /* Alinea el elemento al borde superior */
+    width: 8%; /* Ajusta el ancho según sea necesario */
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos hijos al lado derecho */
+}
+
+#claveInput {
+    flex: 1;
+    padding: 4px 24px 4px 4px; /* Espacio a la derecha para el ícono */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 11px;
+    position: relative; /* Asegura que el campo esté posicionado */
+}
+
+.toggle-clave {
+    position: absolute; /* Usa absolute si el contenedor tiene position: relative; */
+    top: 40%; /* Centra verticalmente el ícono dentro del campo */
+    right: -5px; /* Ajusta la distancia del ícono desde el borde derecho del campo */
+    transform: translateY(-50%); /* Ajusta el ícono para que esté centrado verticalmente */
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    padding: 0; /* Elimina el padding alrededor del ícono */
+}
+
+.eye-icon {
+    font-size: 14px; /* Tamaño del ícono */
+}
+
+/* Estilos para los logos */
+.logo-top-right {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    width: 190px; /* Ajusta el tamaño según sea necesario */
+    z-index: 5; /* Asegura que el logo esté sobre otros elementos */
+}
+
+/* Estilos para el logo rotado en el borde derecho del contenedor */
+.logo-bottom-center {
+    position: absolute;
+    right: -125px; /* Ajusta este valor si es necesario */
+    transform: rotate(-90deg); /* Rota el logo 90 grados */
+    width: 220px; /* Ajusta el tamaño del logo */
+    top: 50%; /* Asegura que el logo esté centrado verticalmente */
+    transform: rotate(-90deg) translateY(-50%); /* Asegura que el logo esté correctamente posicionado */
+    z-index: 10; /* Asegura que el logo esté sobre otros elementos */
+    margin-right: 20px; /* Añade espacio para evitar superposiciones */
+}
+
+/* Ajustar el contenedor para que no se sobreponga el logo */
+.container {
+    position: relative; /* Necesario para el posicionamiento absoluto de los logos */
+    padding-top: 8px; /* Ajusta este valor para dejar espacio para el logo superior */
+    padding-bottom: 80px; /* Ajusta este valor para dejar espacio para el logo inferior */
+}
+
+/* Estilo general para botones */
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 20px auto; /* Añadir margen superior e inferior, y centrar horizontalmente */
+    display: block; /* Hacer que el botón se comporte como un bloque */
+}
+
+/* Estilo para el botón de añadir */
+#addRow {
+    background-color: #6498f9; /* Verde */
+    color: #fff;
+    margin-top: 20px; /* Espacio adicional para separar del contenido superior */
+}
+
+#addRow:hover {
+    background-color: #286aa7; /* Verde más oscuro al pasar el mouse */
+}
+
+#addRow2 {
+    background-color: #6498f9; /* Verde */
+    color: #fff;
+    margin-top: 20px; /* Espacio adicional para separar del contenido superior */
+}
+
+#addRow2:hover {
+    background-color: #286aa7; /* Verde más oscuro al pasar el mouse */
+}
+
+/* Estilo para el botón de eliminar */
+.remove-row {
+    background-color: #dc3545; /* Rojo */
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    width: 28px; /* Ancho fijo para el botón circular */
+    height: 28px; /* Alto fijo para el botón circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-row-2 {
+    background-color: #dc3545; /* Rojo */
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    width: 28px; /* Ancho fijo para el botón circular */
+    height: 28px; /* Alto fijo para el botón circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.remove-row:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el mouse */
+}
+
+.remove-row-2:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el mouse */
+}
+
+/* Estilos para el contenedor de botones */
+.button-container-cotizadores {
+    display: flex; /* Los botones se alinearán horizontalmente por defecto */
+    margin-bottom: -35px; /* Espacio debajo del contenedor de botones */
+    padding: 20px; /* Espaciado interno del botón */
+    justify-content: left; /* Centra los botones horizontalmente */
+}
+
+.button-container-cotizadores button {
+    padding: 8px 19px; /* Ajusta el padding del botón individualmente */
+    margin: 0 5px; /* Espaciado entre botones */
+    font-size: 12px; /* Ajusta el tamaño del texto dentro del botón */
+}
+
+/* Estilos para el primer botón */
+#openCotizador2 {
+    background-color: #4BA3C3; /* Color de fondo */
+    color: #003a4f; /* Color del texto */
+    font-size: 14px; /* Tamaño del texto */
+    margin: 0 8px;
+    border-radius: 8px; /* Esquinas redondeadas */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+/* Estilo al pasar el mouse sobre el primer botón */
+#openCotizador2:hover {
+    background-color: #92bcd3; /* Color de fondo más claro al pasar el mouse */
+}
+
+/* Estilos para el segundo botón */
+#openCotizador3 {
+    background-color: #68D89B; /* Color de fondo */
+    color: #004b22; /* Color del texto */
+    font-size: 14px; /* Tamaño del texto */
+    margin: 0 8px;
+    border-radius: 8px; /* Esquinas redondeadas */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+/* Estilo al pasar el mouse sobre el segundo botón */
+#openCotizador3:hover {
+    background-color: #aff4ce; /* Color de fondo más claro al pasar el mouse */
+}
+
+/* Estilo para los botones de "Volver Principal" y "Volver Principal 3" */
+#volverPrincipal, #volverPrincipal3 {
+    background-color: #286aa7; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    padding: 8px 20px; /* Espaciado interno del botón */
+    font-size: 14px; /* Tamaño del texto */
+    border-radius: 5px; /* Esquinas redondeadas */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+    margin-bottom: -10px; /* Espacio debajo del contenedor de botones */
+}
+
+#volverPrincipal:hover, #volverPrincipal3:hover {
+    background-color: #6498f9; /* Color de fondo más oscuro al pasar el mouse */
+}
+
+/* Estilo para el botón de "Imprimir" */
+#imprimir {
+    background-color: #0e8012; /* Color de fondo - Verde */
+    color: #ffffff; /* Color del texto - Blanco */
+    padding: 8px 20px; /* Espaciado interno del botón */
+    font-size: 14px; /* Tamaño del texto */
+    border-radius: 5px; /* Esquinas redondeadas */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor a una mano al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+#imprimir:hover {
+    background-color: #00ba09; /* Color de fondo más oscuro al pasar el mouse */
+}
+
+/* Estilo para tablas responsivas */
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.form-table th, .form-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Estilo de la celda que contiene el botón de eliminar */
+.form-table td {
+    vertical-align: middle;
+    text-align: left;
+}
+
+/* Asegura que los botones dentro de las celdas estén centrados vertical y horizontalmente */
+.form-table td button {
+    display: block;
+    margin: 0 auto;
+}
+
+#cotizadorDos {
+    display: none; /* Oculta el segundo cotizador inicialmente */
+}
+#cotizadorTres {
+    display: none; /* Oculta el segundo cotizador inicialmente */
+}
+
+@media (max-width: 1200px) {
+    .form-group {
+        width: 50%;
+    }
+
+    .clave {
+        width: 50%;
+    }
+}
+
+@media (max-width: 992px) {
+    .form-group-inline {
+        flex-direction: column;
+    }
+
+    .form-group-inline label, 
+    .form-group-inline input {
+        flex: none;
+        width: 100%;
+    }
+
+    .form-group {
+        width: 90%;
+    }
+
+    .clave {
+        width: 70%;
+    }
+
+    #claveInput {
+        margin-right: 0; /* Ajusta el margen en pantallas más pequeñas */
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%; /* Asegura que el contenedor ocupe todo el ancho en pantallas pequeñas */
+        padding: 30px; /* Ajusta el padding en pantallas pequeñas */
+    }
+
+    .form-group-inline {
+        flex-direction: column;
+    }
+
+    .form-group-inline label, .form-group-inline input {
+        flex: 1;
+        margin-bottom: 10px;
+    }
+
+    .form-table th, .form-table td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-table th {
+        display: none;
+    }
+
+    .form-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    .form-table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+        white-space: nowrap; /* Evita el ajuste de línea */
+    }
+
+    .button-container-cotizadores {
+        flex-direction: row; /* Mantiene los botones en fila horizontal */
+        justify-content: center; /* Centra los botones horizontalmente */
+    }
+
+    #openCotizador2, #openCotizador3 {
+        width: auto; /* Permite que los botones se ajusten automáticamente */
+        max-width: 80%; /* Asegura que los botones no excedan el ancho del contenedor */
+        margin: 6px; /* Espacio entre los botones en pantallas pequeñas */
+        font-size: 12px;
+    }
+
+    .clave {
+        width: 10%; /* Permite que los botones se ajusten automáticamente */
+        margin: 2px; /* Espacio entre los botones en pantallas pequeñas */
+        font-size: 10px;
+    }
+
+    #volverPrincipal, #volverPrincipal3 {
+        max-width: 80%; /* Asegura que los botones no excedan el ancho del contenedor */
+        font-size: 12px;
+    }
+
+    /* Reducir tamaño del título y logos en pantallas pequeñas */
+    h1 {
+        font-size: 16px; /* Ajusta el tamaño según sea necesario */
+    }
+
+    h2 {
+        font-size: 14px; /* Ajusta el tamaño según sea necesario */
+    }
+
+    h3 {
+        font-size: 16px; /* Ajusta el tamaño según sea necesario */
+    }
+
+    .logo-top-right {
+        width: 100px; /* Ajusta el tamaño según sea necesario */
+        top: 10px;
+        right: 10px;
+    }
+
+    .logo-bottom-center {
+        width: 150px; /* Ajusta el tamaño según sea necesario */
+        right: -80px; /* Ajusta la posición para que no interfiera */
+        transform: rotate(-90deg);
+    }
+
+    .form-group input {
+        font-size: 11px;
+    }
+
+    .eye-icon {
+        font-size: 12px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .logo-top-right {
+        max-width: 150px; /* Ajusta el tamaño del logo */
+        height: auto; /* Mantiene la proporción del logo */
+        margin-bottom: 10px; /* Añade un margen inferior para separar del título */
+    }
+    
+    h2 {
+        font-size: 18px; /* Ajusta el tamaño de los subtítulos */
+    }
+
+    .form-group-inline {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        gap: 10px; /* Espacio entre elementos */
+    }
+
+    .form-group-inline label {
+        width: auto; /* Ajuste automático del ancho de los labels */
+    }
+
+    .form-group-inline input[type="date"], 
+    .form-group-inline input[type="number"] {
+        flex: 0 1 auto; /* Evita que los inputs se expandan demasiado */
+    }
+
+    /* Oculta el ícono de calendario en los campos de fecha */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+    
+    /* Ocultar elementos innecesarios en la impresión */
+    #openCotizador2, #openCotizador3, #addRow, #addRow2, #imprimir, #volverPrincipal, #volverPrincipal3 {
+        display: none; /* Oculta botones y otros elementos innecesarios */
+    }
+
+    /* Ocultar la celda que contiene el botón de eliminar */
+    .clave,
+    .form-table td:last-child,
+    .form-table th:last-child {
+        display: none;
+    }
+
+    /* Mostrar la columna de "Prima" explícitamente */
+    .form-table th:nth-child(8), /* Asegura que la columna de "Prima" se muestre */
+    .form-table td:nth-child(8) {
+        display: table-cell;
+    }
+
+    /* Ocultar las columnas de días de garantía y tasa */
+    .form-table th:nth-child(6), /* Suponiendo que la columna de "Días de Garantía" es la tercera */
+    .form-table th:nth-child(7), /* Suponiendo que la columna de "Tasa" es la cuarta */
+    .form-table td:nth-child(6),
+    .form-table td:nth-child(7) {
+        display: none;
+    }
+
+    /* Agregar el texto al final de la impresión */
+    .print-footer {
+        position: absolute; /* Cambiar de fixed a absolute para pruebas */
+        bottom: 8mm;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 8px;
+        color: #760202;
+    }
+}
+
+/* Asegurar que el fondo de la página sea blanco */
+html, body {
+    background: #fff; /* Fondo blanco para toda la página de impresión */
+}
+
+@media screen {
+    .print-footer {
+        display: none; /* Oculta el texto en la vista web */
+    }
+}
