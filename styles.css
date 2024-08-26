@@ -121,8 +121,7 @@ h3 {
     font-size: 12px;
     font-weight: 500;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Crea 4 columnas de igual tamaño */
-    border-collapse: collapse; /* Asegura que los bordes se colapsen como en una tabla */
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en pantallas grandes */
     width: 100%; /* Ocupa todo el ancho disponible */
     margin-top: 100px; /* Espacio en la parte superior */
     margin-bottom: 33px; /* Espacio en la parte inferior */
@@ -435,6 +434,13 @@ button {
         padding: 30px; /* Ajusta el padding en pantallas pequeñas */
     }
 
+    .form-group input {
+        font-size: 11px;
+    }
+    .form-group {
+        width: 250%;
+    }
+
     .form-group-inline {
         flex-direction: column;
     }
@@ -468,6 +474,32 @@ button {
         white-space: nowrap; /* Evita el ajuste de línea */
     }
 
+    .total-group {
+        grid-template-columns: 1fr 1fr; /* 2 columnas de igual tamaño */
+        grid-template-rows: repeat(4, auto); /* 4 filas automáticas */
+    }
+
+    /* Coloca los labels e inputs en la misma fila, alineados frente a frente */
+    .total-group label:nth-child(1),
+    .total-group input:nth-child(5) {
+        grid-row: 1;
+    }
+
+    .total-group label:nth-child(2),
+    .total-group input:nth-child(6) {
+        grid-row: 2;
+    }
+
+    .total-group label:nth-child(3),
+    .total-group input:nth-child(7) {
+        grid-row: 3;
+    }
+
+    .total-group label:nth-child(4),
+    .total-group input:nth-child(8) {
+        grid-row: 4;
+    }
+
     .button-container-cotizadores {
         flex-direction: row; /* Mantiene los botones en fila horizontal */
         justify-content: center; /* Centra los botones horizontalmente */
@@ -484,6 +516,9 @@ button {
         width: 10%; /* Permite que los botones se ajusten automáticamente */
         margin: 2px; /* Espacio entre los botones en pantallas pequeñas */
         font-size: 10px;
+    }
+    .eye-icon {
+        font-size: 12px;
     }
 
     #volverPrincipal, #volverPrincipal3 {
@@ -514,14 +549,6 @@ button {
         width: 150px; /* Ajusta el tamaño según sea necesario */
         right: -80px; /* Ajusta la posición para que no interfiera */
         transform: rotate(-90deg);
-    }
-
-    .form-group input {
-        font-size: 11px;
-    }
-
-    .eye-icon {
-        font-size: 12px;
     }
 }
 
