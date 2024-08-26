@@ -580,6 +580,11 @@ button {
         flex: 0 1 auto; /* Evita que los inputs se expandan demasiado */
     }
 
+    .form-group-inline label[for="dias"],
+    .form-group-inline #dias {
+        display: none;
+    }
+
     /* Oculta el ícono de calendario en los campos de fecha */
     input[type="date"]::-webkit-calendar-picker-indicator {
         display: none;

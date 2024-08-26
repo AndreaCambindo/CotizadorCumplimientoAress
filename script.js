@@ -374,31 +374,49 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calcularPrima() {
+        // Obtener todos los inputs relevantes
         const valorGarantiaInputs = document.querySelectorAll('input[name^="valorGarantia"]:not([style*="display: none"])');
         const tasaInputs = document.querySelectorAll('input[name^="tasa"]:not([style*="display: none"])');
         const diasGarantiaInputs = document.querySelectorAll('input[name^="diasGarantia"]:not([style*="display: none"])');
         const primaInputs = document.querySelectorAll('input[name^="prima"]:not([style*="display: none"])');
+        const garantiaSelects = document.querySelectorAll('select[name="garantia"]');
+        const fechaInicialGarantiaInputs = document.querySelectorAll('input[name^="fechaInicialGarantia"]');
+        const fechaFinalGarantiaInputs = document.querySelectorAll('input[name^="fechaFinalGarantia"]');
     
         let totalPrima = 0;
     
         valorGarantiaInputs.forEach((input, index) => {
             const valorGarantia = parseFloat(input.value) || 0;
-            const fechaInicialGarantia = garantiaInputs[index].value;
-            const fechaFinalGarantia = fechaFinalGarantiaInputs[index].value;
+            const fechaInicialGarantia = fechaInicialGarantiaInputs[index]?.value || '';
+            const fechaFinalGarantia = fechaFinalGarantiaInputs[index]?.value || '';
             const tasa = parseFloat(tasaInputs[index].value) || 0;
             const diasGarantia = parseInt(diasGarantiaInputs[index].value) || 0;
+            const garantia = garantiaSelects[index]?.value.toLowerCase() || '';
     
-            if (valorGarantia > 0 && tasa > 0 && fechaInicialGarantia && fechaFinalGarantia && diasGarantia > 0) {
-                const dias = calcularDias(fechaInicialGarantia, fechaFinalGarantia);
-                const prima = Math.round((valorGarantia * (tasa / 100)) * (dias / 365));
-                primaInputs[index].value = prima;
+            let prima = 0;
+    
+            if (valorGarantia > 0 && tasa > 0 && fechaInicialGarantia && fechaFinalGarantia) {
+                if (garantia.includes("seriedad")) {
+                    // Exclusivamente para "Seriedad": calcular prima solo con valorGarantia y tasa
+                    prima = valorGarantia * (tasa / 100);
+                } else {
+                    // Calcular con los días de garantía si están presentes
+                    const dias = calcularDias(fechaInicialGarantia, fechaFinalGarantia);
+                    if (diasGarantia > 0) {
+                        prima = Math.round((valorGarantia * (tasa / 100)) * (dias / 365));
+                    } else {
+                        // Si no se ingresan días, usar los días del contrato
+                        prima = Math.round((valorGarantia * (tasa / 100)) * (dias / 365));
+                    }
+                }
+                primaInputs[index].value = prima.toFixed();
                 totalPrima += prima; // Acumulamos la prima total
             } else {
                 primaInputs[index].value = ''; // Resetea el valor de la prima si no se cumplen las condiciones
             }
         });
     
-        document.getElementById('totalPrima').value = totalPrima; // Asigna el valor total de la prima
+        document.getElementById('totalPrima').value = totalPrima.toFixed(2); // Asigna el valor total de la prima
         actualizarIVA(); // Actualiza el IVA basado en el nuevo totalPrima
         actualizarTotalPrima();
     }
