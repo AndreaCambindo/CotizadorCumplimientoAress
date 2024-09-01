@@ -29,11 +29,11 @@
 
         <form id="fechaForm">
             <div class="form-group-inline">
-                <label for="desde">Fecha Inicial:</label>
+                <label for="desde">Fecha Inicial Contrato:</label>
                 <input type="date" id="desde" name="desde" required>
-                <label for="dias">Número de Días:</label>
+                <label for="dias">Días:</label>
                 <input type="number" id="dias" name="dias" required>
-                <label for="hasta">Fecha Final:</label>
+                <label for="hasta">Fecha Final Contrato:</label>
                 <input type="date" id="hasta" name="hasta">
             </div>
             <div class="form-group">
@@ -48,8 +48,8 @@
                     <th>Garantía</th>
                     <th>%</th>
                     <th>Valor de la Garantía</th>
-                    <th>Fecha Inicial</th>
-                    <th>Fecha Final</th>
+                    <th>Fecha Inicial Garantía</th>
+                    <th>Fecha Final Garantía</th>
                     <th>Días</th>
                     <th>Tasa</th>
                     <th>Prima</th>
@@ -262,12 +262,29 @@
 
         <button type="button" id="addRow">Añadir Garantía</button>
 
+
+        <table class="form-table-sumas">
+            <thead>
+                <tr>
+                    <th>Prima Neta CUM</th>
+                    <th>Prima Neta RCE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="number" id="sumaCum" name="sumaCum" readonly></td>
+                    <td><input type="number" id="sumaRCE" name="sumaRCE" readonly></td>
+                </tr>
+            </tbody>
+        </table>
+
+
 		<!-- Campos de Totales -->
 		<div class="total-group">
-            <label for="totalPrima">Prima</label>
+            <label for="totalPrima">Primas</label>
             <label for="gastosExpedicion">Gastos de Expedición</label>
             <label for="iva">IVA (19%)</label>
-            <label for="total">Total Prima</label>
+            <label for="total">Total Primas</label>
             
             <input type="number" id="totalPrima" name="totalPrima" readonly>
             <input type="number" id="gastosExpedicion" name="gastosExpedicion" value="10000" readonly>
@@ -292,11 +309,11 @@
 
         <form id="fechaForm">
             <div class="form-group-inline">
-                <label for="desde2">Fecha Inicial:</label>
+                <label for="desde2">Fecha Inicial Contrato:</label>
                 <input type="date" id="desde2" name="desde2" required>
-                <label for="dias2">Número de Días:</label>
+                <label for="dias2">Días:</label>
                 <input type="number" id="dias2" name="dias2" required>
-                <label for="hasta2">Fecha Final:</label>
+                <label for="hasta2">Fecha Final Contrato:</label>
                 <input type="date" id="hasta2" name="hasta2">
             </div>
             <div class="form-group">
@@ -311,8 +328,8 @@
                     <th>Garantía</th>
                     <th>%</th>
                     <th>Valor de la Garantía</th>
-                    <th>Fecha Inicial</th>
-                    <th>Fecha Final</th>
+                    <th>Fecha Inicial Garantía</th>
+                    <th>Fecha Final Garantía</th>
                     <th>Días</th>
                     <th>Tasa</th>
                     <th>Prima</th>
@@ -429,11 +446,11 @@
 
     <form id="fechaForm">
         <div class="form-group-inline">
-            <label for="desde3">Fecha Inicial:</label>
+            <label for="desde3">Fecha Inicial Contrato:</label>
             <input type="date" id="desde3" name="desde3" required>
-            <label for="dias2">Número de Días:</label>
+            <label for="dias2">Días:</label>
             <input type="number" id="dias3" name="dias3" required>
-            <label for="hasta3">Fecha Final:</label>
+            <label for="hasta3">Fecha Final Contrato:</label>
             <input type="date" id="hasta3" name="hasta3">
         </div>
         <div class="form-group">
@@ -448,8 +465,8 @@
                 <th>Garantía</th>
                 <th>%</th>
                 <th>Valor de la Garantía</th>
-                <th>Fecha Inicial</th>
-                <th>Fecha Final</th>
+                <th>Fecha Inicial Garantía</th>
+                <th>Fecha Final Garantía</th>
                 <th>Días</th>
                 <th>Tasa</th>
                 <th>Prima</th>

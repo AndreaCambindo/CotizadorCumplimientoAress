@@ -116,6 +116,37 @@ h3 {
     box-sizing: border-box;
 }
 
+
+
+/* Estilos para la tabla de sumas CU y RCE */
+.form-table-sumas {
+    border-collapse: collapse;
+    margin: 80px auto; /* Centra la tabla horizontalmente */
+    width: auto; /* Ajusta el ancho al tamaño del contenido */
+    margin-bottom: -50px;
+    padding: 50px;
+    font-size: 11px;
+}
+
+.form-table-sumas th,
+.form-table-sumas td {
+    border: 1px solid #98bcfe; /* Borde alrededor de las celdas */
+    padding: 3px; /* Espacio dentro de cada celda */
+    text-align: center; /* Centra el texto dentro de las celdas */
+}
+
+.form-table-sumas th {
+    background-color: #bcd3ff; /* Color de fondo para los títulos */
+    font-weight: bold; /* Negrita para los títulos */
+}
+
+.form-table-sumas input {
+    border: none; /* Quita el borde del input */
+    width: 100%; /* Hace que el input ocupe todo el ancho de la celda */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho del input */
+    text-align: center;
+}
+
 /*Estilos Totales como tabla*/
 .total-group {
     font-size: 12px;
@@ -580,8 +611,8 @@ button {
         flex: 0 1 auto; /* Evita que los inputs se expandan demasiado */
     }
 
-    .form-group-inline label[for="dias"],
-    .form-group-inline #dias {
+    .form-group-inline label[for="dias"], [for="dias2"], [for="dias3"],
+    .form-group-inline #dias, #dias2, #dias3 {
         display: none;
     }
 

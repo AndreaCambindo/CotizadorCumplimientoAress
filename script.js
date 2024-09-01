@@ -382,9 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const garantiaSelects = document.querySelectorAll('select[name="garantia"]');
         const fechaInicialGarantiaInputs = document.querySelectorAll('input[name^="fechaInicialGarantia"]');
         const fechaFinalGarantiaInputs = document.querySelectorAll('input[name^="fechaFinalGarantia"]');
-    
-        let totalPrima = 0;
-    
+        
         valorGarantiaInputs.forEach((input, index) => {
             const valorGarantia = parseFloat(input.value) || 0;
             const fechaInicialGarantia = fechaInicialGarantiaInputs[index]?.value || '';
@@ -392,9 +390,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const tasa = parseFloat(tasaInputs[index].value) || 0;
             const diasGarantia = parseInt(diasGarantiaInputs[index].value) || 0;
             const garantia = garantiaSelects[index]?.value.toLowerCase() || '';
-    
+
             let prima = 0;
-    
+
             if (valorGarantia > 0 && tasa > 0 && fechaInicialGarantia && fechaFinalGarantia) {
                 if (garantia.includes("seriedad")) {
                     // Exclusivamente para "Seriedad": calcular prima solo con valorGarantia y tasa
@@ -410,37 +408,113 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
                 primaInputs[index].value = prima.toFixed();
-                totalPrima += prima; // Acumulamos la prima total
             } else {
                 primaInputs[index].value = ''; // Resetea el valor de la prima si no se cumplen las condiciones
             }
         });
-    
-        document.getElementById('totalPrima').value = totalPrima.toFixed(2); // Asigna el valor total de la prima
+
+        calcularSumaCum();
+        calcularSumaRCE();
+
+        // Actualizar el total de la prima
+        const sumaCum = parseFloat(document.getElementById('sumaCum').value) || 0;
+        const sumaRCE = parseFloat(document.getElementById('sumaRCE').value) || 0;
+        const totalPrima = sumaCum + sumaRCE;
+        document.getElementById('totalPrima').value = totalPrima.toFixed(0);
+
         actualizarIVA(); // Actualiza el IVA basado en el nuevo totalPrima
         actualizarTotalPrima();
     }
 
-    function actualizarTotalPrima() {
-        let totalPrima = 0;
-    
-        // Recalcular el total prima sumando los valores actuales de cada fila
-        primaInputs.forEach(input => {
-            const prima = parseFloat(input.value);
-            if (!isNaN(prima)) {
-                totalPrima += prima;
+    function calcularSumaCum() {
+        const valorGarantiaInputs = document.querySelectorAll('input[name^="valorGarantia"]:not([style*="display: none"])');
+        const tasaInputs = document.querySelectorAll('input[name^="tasa"]:not([style*="display: none"])');
+        const garantiaSelects = document.querySelectorAll('select[name="garantia"]');
+
+        let sumaCum = 0;
+
+        valorGarantiaInputs.forEach((input, index) => {
+            const valorGarantia = parseFloat(input.value) || 0;
+            const tasa = parseFloat(tasaInputs[index].value) || 0;
+            const garantia = garantiaSelects[index]?.value.toLowerCase() || '';
+
+            let prima = 0;
+
+            if (valorGarantia > 0 && tasa > 0) {
+                if (garantia.includes("seriedad")) {
+                    // Exclusivamente para "Seriedad": calcular prima solo con valorGarantia y tasa
+                    prima = valorGarantia * (tasa / 100);
+                } else {
+                    // Calcular con los días de garantía si están presentes
+                    prima = parseFloat(primaInputs[index].value) || 0;
+                }
+
+                if (!garantia.includes("responsabilidadcivil")) {
+                    sumaCum += prima; // Suma de otras garantías
+                }
             }
         });
-    
-        // Ajuste: Si el total prima es menor o igual a 75,000, ajusta a 80,000
-        if (totalPrima <= 75000) {
-            totalPrima = 80000;
+
+        // Ajuste: Si la sumaCum es menor o igual a 75,000, ajusta a 80,000
+        if (sumaCum <= 75000) {
+            sumaCum = 80000;
         }
+
+        document.getElementById('sumaCum').value = sumaCum.toFixed();
+    }
+
+    function calcularSumaRCE() {
+        const valorGarantiaInputs = document.querySelectorAll('input[name^="valorGarantia"]:not([style*="display: none"])');
+        const tasaInputs = document.querySelectorAll('input[name^="tasa"]:not([style*="display: none"])');
+        const garantiaSelects = document.querySelectorAll('select[name="garantia"]');
+
+        let sumaRCE = 0;
+
+        valorGarantiaInputs.forEach((input, index) => {
+            const valorGarantia = parseFloat(input.value) || 0;
+            const tasa = parseFloat(tasaInputs[index].value) || 0;
+            const garantia = garantiaSelects[index]?.value.toLowerCase() || '';
+
+            let prima = 0;
+
+            if (valorGarantia > 0 && tasa > 0) {
+                if (garantia.includes("seriedad")) {
+                    // Exclusivamente para "Seriedad": calcular prima solo con valorGarantia y tasa
+                    prima = valorGarantia * (tasa / 100);
+                } else {
+                    // Calcular con los días de garantía si están presentes
+                    prima = parseFloat(primaInputs[index].value) || 0;
+                }
+
+                if (garantia.includes("responsabilidadcivil")) {
+                    sumaRCE = prima; // Solo la última prima para responsabilidad civil
+                }
+            }
+        });
+
+        // Ajuste de la prima de responsabilidad civil solo si se ha seleccionado
+        if (sumaRCE > 0 && sumaRCE < 90000) {
+            sumaRCE = 90000;
+        } else if (sumaRCE <= 0) {
+            sumaRCE = 0;
+        }
+
+        // Actualizar el campo de la tabla
+        document.getElementById('sumaRCE').value = sumaRCE.toFixed();
+    }
+
+    function actualizarTotalPrima() {
+        // Obtener los valores de sumaCum y sumaRCE
+        const sumaCum = parseFloat(document.getElementById('sumaCum').value) || 0;
+        const sumaRCE = parseFloat(document.getElementById('sumaRCE').value) || 0;
     
-        // Actualiza el campo de Total Prima con el valor redondeado
+        // Calcular el totalPrima sumando sumaCum y sumaRCE
+        const totalPrima = sumaCum + sumaRCE;
+    
+        // Actualizar el campo de Total Prima con el valor redondeado
         document.getElementById('totalPrima').value = Math.round(totalPrima);
     
-        // Actualiza el IVA y el total con IVA después de recalcular el total prima
+        // Actualiza el IVA y el total con IVA después de recalcular el totalPrima
         actualizarIVA();
     }
 
