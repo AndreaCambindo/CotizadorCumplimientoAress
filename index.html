@@ -262,35 +262,53 @@
 
         <button type="button" id="addRow">Añadir Garantía</button>
 
-
-        <table class="form-table-sumas">
+        <table class="form-table-sumas-CUM">
             <thead>
                 <tr>
                     <th>Prima Neta CUM</th>
-                    <th>Prima Neta RCE</th>
+                    <th>Gastos de Expedición</th>
+                    <th>IVA (19%)</th>
+                    <th>Total Prima CUM</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td><input type="number" id="sumaCum" name="sumaCum" readonly></td>
+                    <td><input type="number" id="gastosExpedicion" name="gastosExpedicion" value="10000" readonly></td>
+                    <td><input type="number" id="ivaCum" name="ivaCum" readonly></td>
+                    <td><input type="number" id="totalCum" name="totalCum" readonly></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="form-table-sumas-RCE">
+            <thead>
+                <tr>
+                    <th>Prima Neta RCE</th>
+                    <th>Gastos de Expedición</th>
+                    <th>IVA (19%)</th>
+                    <th>Total Prima RCE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
                     <td><input type="number" id="sumaRCE" name="sumaRCE" readonly></td>
+                    <td><input type="number" id="gastosExpedicion" name="gastosExpedicion" value="10000" readonly></td>
+                    <td><input type="number" id="ivaRCE" name="ivaRCE" readonly></td>
+                    <td><input type="number" id="totalRCE" name="totalRCE" readonly></td>
                 </tr>
             </tbody>
         </table>
 
 
-		<!-- Campos de Totales -->
-		<div class="total-group">
-            <label for="totalPrima">Primas</label>
-            <label for="gastosExpedicion">Gastos de Expedición</label>
-            <label for="iva">IVA (19%)</label>
-            <label for="total">Total Primas</label>
-            
-            <input type="number" id="totalPrima" name="totalPrima" readonly>
-            <input type="number" id="gastosExpedicion" name="gastosExpedicion" value="10000" readonly>
-            <input type="number" id="iva" name="iva" readonly>
-            <input type="number" id="total" name="total" readonly>
-        </div>
+        <table class="total-groupP">
+            <tr>
+                <td><label for="total">Total Primas</label></td>
+            </tr>
+            <tr>
+                <td><input type="number" id="total" name="total" readonly></td>
+            </tr>
+        </table>
 		</form>
 
         <button id="imprimir" class="no-print" onclick="window.print()">Imprimir Cotizacón</button>

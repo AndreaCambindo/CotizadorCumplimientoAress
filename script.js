@@ -415,14 +415,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         calcularSumaCum();
         calcularSumaRCE();
-
-        // Actualizar el total de la prima
-        const sumaCum = parseFloat(document.getElementById('sumaCum').value) || 0;
-        const sumaRCE = parseFloat(document.getElementById('sumaRCE').value) || 0;
-        const totalPrima = sumaCum + sumaRCE;
-        document.getElementById('totalPrima').value = totalPrima.toFixed(0);
-
-        actualizarIVA(); // Actualiza el IVA basado en el nuevo totalPrima
         actualizarTotalPrima();
     }
 
@@ -461,78 +453,81 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         document.getElementById('sumaCum').value = sumaCum.toFixed();
+        actualizarIVA('cum');
     }
 
     function calcularSumaRCE() {
         const valorGarantiaInputs = document.querySelectorAll('input[name^="valorGarantia"]:not([style*="display: none"])');
         const tasaInputs = document.querySelectorAll('input[name^="tasa"]:not([style*="display: none"])');
         const garantiaSelects = document.querySelectorAll('select[name="garantia"]');
-
+    
         let sumaRCE = 0;
-
+        let hasSelectedResponsabilidadCivil = false;  // Verificar si se seleccionó 'Responsabilidad Civil'
+    
         valorGarantiaInputs.forEach((input, index) => {
             const valorGarantia = parseFloat(input.value) || 0;
             const tasa = parseFloat(tasaInputs[index].value) || 0;
             const garantia = garantiaSelects[index]?.value.toLowerCase() || '';
-
+    
             let prima = 0;
-
-            if (valorGarantia > 0 && tasa > 0) {
-                if (garantia.includes("seriedad")) {
-                    // Exclusivamente para "Seriedad": calcular prima solo con valorGarantia y tasa
-                    prima = valorGarantia * (tasa / 100);
-                } else {
-                    // Calcular con los días de garantía si están presentes
-                    prima = parseFloat(primaInputs[index].value) || 0;
-                }
-
-                if (garantia.includes("responsabilidadcivil")) {
-                    sumaRCE = prima; // Solo la última prima para responsabilidad civil
-                }
+    
+            // Si se selecciona la garantía de Responsabilidad Civil
+            if (valorGarantia > 0 && tasa > 0 && garantia.includes("responsabilidadcivil")) {
+                hasSelectedResponsabilidadCivil = true;  // Se seleccionó Responsabilidad Civil
+                prima = parseFloat(primaInputs[index].value) || 0;
+                sumaRCE = prima;
             }
         });
-
-        // Ajuste de la prima de responsabilidad civil solo si se ha seleccionado
-        if (sumaRCE > 0 && sumaRCE < 90000) {
-            sumaRCE = 90000;
-        } else if (sumaRCE <= 0) {
-            sumaRCE = 0;
+    
+        // Solo calcular IVA y actualizar sumaRCE si se seleccionó 'Responsabilidad Civil'
+        if (hasSelectedResponsabilidadCivil) {
+            if (sumaRCE > 0 && sumaRCE < 90000) {
+                sumaRCE = 90000;  // Ajustar el mínimo de sumaRCE
+            }
+            document.getElementById('sumaRCE').value = sumaRCE.toFixed();
+            actualizarIVA('rce');  // Solo calcular el IVA si hay Responsabilidad Civil seleccionada
+        } else {
+            // Si no se seleccionó Responsabilidad Civil, limpiar los campos relacionados
+            document.getElementById('sumaRCE').value = '';  // No se muestra la suma
+            document.getElementById('ivaRCE').value = '';   // No se muestra el IVA
+            document.getElementById('totalRCE').value = ''; // No se muestra el total prima
         }
-
-        // Actualizar el campo de la tabla
-        document.getElementById('sumaRCE').value = sumaRCE.toFixed();
     }
 
-    function actualizarTotalPrima() {
-        // Obtener los valores de sumaCum y sumaRCE
-        const sumaCum = parseFloat(document.getElementById('sumaCum').value) || 0;
-        const sumaRCE = parseFloat(document.getElementById('sumaRCE').value) || 0;
+    function actualizarIVA(tipo) {
+        let suma;
+        let ivaId;
+        let totalId;
     
-        // Calcular el totalPrima sumando sumaCum y sumaRCE
-        const totalPrima = sumaCum + sumaRCE;
+        if (tipo === 'cum') {
+            suma = parseFloat(document.getElementById('sumaCum').value) || 0;
+            ivaId = 'ivaCum';
+            totalId = 'totalCum';
+        } else if (tipo === 'rce') {
+            suma = parseFloat(document.getElementById('sumaRCE').value) || 0;
+            ivaId = 'ivaRCE';
+            totalId = 'totalRCE';
+        }
     
-        // Actualizar el campo de Total Prima con el valor redondeado
-        document.getElementById('totalPrima').value = Math.round(totalPrima);
-    
-        // Actualiza el IVA y el total con IVA después de recalcular el totalPrima
-        actualizarIVA();
-    }
-
-    function actualizarIVA() {
-        const totalPrima = parseFloat(document.getElementById('totalPrima').value) || 0;
         const gastosExpedicion = parseFloat(document.getElementById('gastosExpedicion').value) || 0;
-        const baseImponible = totalPrima + gastosExpedicion;
+        const baseImponible = suma + gastosExpedicion;
         const iva = Math.round(baseImponible * 0.19);
-        document.getElementById('iva').value = iva;
-        actualizarTotalConIVA();
+    
+        document.getElementById(ivaId).value = iva.toFixed(0);
+        document.getElementById(totalId).value = (suma + gastosExpedicion + iva).toFixed(0);
+        
+        // Actualizar el total de la prima con IVA
+        actualizarTotalPrima();
     }
-
-    function actualizarTotalConIVA() {
-        const totalPrima = parseFloat(document.getElementById('totalPrima').value) || 0;
-        const gastosExpedicion = parseFloat(document.getElementById('gastosExpedicion').value) || 0;
-        const iva = parseFloat(document.getElementById('iva').value) || 0;
-        const totalConIva = totalPrima + gastosExpedicion + iva;
-        document.getElementById('total').value = totalConIva;
+    
+    function actualizarTotalPrima() {
+        const sumaCum = parseFloat(document.getElementById('totalCum').value) || 0;
+        const sumaRCE = parseFloat(document.getElementById('totalRCE').value) || 0;
+        
+        const totalPrima = sumaCum + sumaRCE;
+        
+        // Actualizar el campo de Total Prima con el valor redondeado
+        document.getElementById('total').value = Math.round(totalPrima);
     }
 
     // Inicializa los gastos de expedición con el valor predeterminado

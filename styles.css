@@ -116,10 +116,8 @@ h3 {
     box-sizing: border-box;
 }
 
-
-
 /* Estilos para la tabla de sumas CU y RCE */
-.form-table-sumas {
+.form-table-sumas-CUM {
     border-collapse: collapse;
     margin: 80px auto; /* Centra la tabla horizontalmente */
     width: auto; /* Ajusta el ancho al tamaño del contenido */
@@ -128,26 +126,78 @@ h3 {
     font-size: 11px;
 }
 
-.form-table-sumas th,
-.form-table-sumas td {
+.form-table-sumas-CUM th,
+.form-table-sumas-CUM td {
     border: 1px solid #98bcfe; /* Borde alrededor de las celdas */
     padding: 3px; /* Espacio dentro de cada celda */
     text-align: center; /* Centra el texto dentro de las celdas */
 }
 
-.form-table-sumas th {
+.form-table-sumas-CUM th {
     background-color: #bcd3ff; /* Color de fondo para los títulos */
     font-weight: bold; /* Negrita para los títulos */
 }
 
-.form-table-sumas input {
+.form-table-sumas-CUM input {
     border: none; /* Quita el borde del input */
     width: 100%; /* Hace que el input ocupe todo el ancho de la celda */
     box-sizing: border-box; /* Asegura que el padding no afecte el ancho del input */
     text-align: center;
 }
 
-/*Estilos Totales como tabla*/
+/* Estilos para la tabla de sumas CU y RCE */
+.form-table-sumas-RCE {
+    border-collapse: collapse;
+    margin: 80px auto; /* Centra la tabla horizontalmente */
+    width: auto; /* Ajusta el ancho al tamaño del contenido */
+    margin-bottom: -50px;
+    padding: 50px;
+    font-size: 11px;
+}
+
+.form-table-sumas-RCE th,
+.form-table-sumas-RCE td {
+    border: 1px solid #98bcfe; /* Borde alrededor de las celdas */
+    padding: 3px; /* Espacio dentro de cada celda */
+    text-align: center; /* Centra el texto dentro de las celdas */
+}
+
+.form-table-sumas-RCE th {
+    background-color: #bcd3ff; /* Color de fondo para los títulos */
+    font-weight: bold; /* Negrita para los títulos */
+}
+
+.form-table-sumas-RCE input {
+    border: none; /* Quita el borde del input */
+    width: 100%; /* Hace que el input ocupe todo el ancho de la celda */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho del input */
+    text-align: center;
+}
+
+/* Estilos Totales como tabla */
+.total-groupP {
+    border-collapse: collapse; /* Elimina el espacio entre los bordes de las celdas */
+    margin: 80px auto; /* Centra la tabla horizontalmente y añade margen superior e inferior */
+    width: auto; /* Ajusta el ancho al tamaño del contenido */
+    padding: 50px; /* Añade padding alrededor de la tabla */
+    font-size: 12px; /* Tamaño de la fuente */
+    font-weight: bold;
+}
+.total-groupP th,
+.total-groupP td {
+    padding: 1px; /* Espacio dentro de cada celda */
+    text-align: center; /* Centra el texto dentro de las celdas */
+    background-color: #bcd3ff;
+}
+
+.total-groupP input {
+    border: none; /* Quita el borde del input */
+    width: 100%; /* Hace que el input ocupe todo el ancho de la celda */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho del input */
+    text-align: center; /* Centra el texto dentro del input */
+    padding: 4px;
+}
+
 .total-group {
     font-size: 12px;
     font-weight: 500;
@@ -171,7 +221,6 @@ h3 {
 
 .total-group input {
     background-color: #fff; /* Fondo blanco para los inputs */
-    box-sizing: border-box; /* Asegura que el padding no afecte el ancho del input */
 }
 
 /*Estilos Boton Clave*/
