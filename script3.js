@@ -292,10 +292,105 @@ document.addEventListener('DOMContentLoaded', function() {
             // Calcular la prima ajustada por el número de días en el año
             const prima = Math.round((valorGarantia * (tasa / 100)) * (dias / 365));
             primaInputs3[index].value = prima;
-            actualizarTotalPrima(); // Recalcular el total de la prima
         }
     }
 
+    function calcularSumaCum() {
+        let sumaCum = 0;
+        let algunaGarantiaSeleccionada = false;
+    
+        garantiaSelects3.forEach((select, index) => {
+            if (select.value !== 'responsabilidadCivil') {
+                const prima = parseFloat(primaInputs3[index].value) || 0;
+                
+                // Si la garantía es "Otro", sigue adelante con el cálculo sin modificar
+                if (select.value === 'otro') {
+                    // No modificamos el cálculo de prima para "Otro", simplemente lo incluimos en la suma
+                }
+    
+                // Verifica si la garantía tiene prima mayor a 0
+                if (prima > 0) {
+                    algunaGarantiaSeleccionada = true; 
+                }
+                sumaCum += prima;
+            }
+        });
+    
+        // Solo aplicar la prima mínima si hay alguna garantía seleccionada
+        if (algunaGarantiaSeleccionada && sumaCum < 80000) {
+            sumaCum = 80000;
+        }
+    
+        document.getElementById('sumaCum3').value = sumaCum;
+    
+        const ivaCum = Math.round(sumaCum * 0.19);
+        document.getElementById('ivaCum3').value = ivaCum;
+    
+        const gastosExpedicion = parseFloat(document.getElementById('gastosExpedicion3').value) || 0;
+        const totalCum = sumaCum + gastosExpedicion + ivaCum;
+        document.getElementById('totalCum3').value = totalCum;
+    }
+    
+    function calcularSumaRce() {
+        let sumaRce = 0;
+        let responsabilidadCivilSeleccionada = false;
+    
+        garantiaSelects3.forEach((select, index) => {
+            if (select.value === 'responsabilidadCivil') {
+                const prima = parseFloat(primaInputs3[index].value) || 0;
+                if (prima > 0) {
+                    responsabilidadCivilSeleccionada = true; // Verifica si responsabilidad civil está seleccionada con prima mayor a 0
+                }
+                sumaRce += prima;
+            }
+        });
+    
+        // Solo aplicar la prima mínima si 'Responsabilidad Civil' está seleccionada
+        if (responsabilidadCivilSeleccionada && sumaRce < 80000) {
+            sumaRce = 80000;
+        }
+    
+        document.getElementById('sumaRCE3').value = sumaRce;
+    
+        const ivaRce = Math.round(sumaRce * 0.19);
+        document.getElementById('ivaRCE3').value = ivaRce;
+    
+        let gastosExpedicionRce = 0;
+
+        // Solo agregar los 10,000 de gastos de expedición si 'Responsabilidad Civil' está seleccionada
+        if (responsabilidadCivilSeleccionada) {
+            gastosExpedicionRce = 10000; // Valor fijo de 10,000
+        }
+    
+        const totalRce = sumaRce + gastosExpedicionRce + ivaRce;
+        document.getElementById('totalRCE3').value = totalRce;
+    }
+    
+    
+    function calcularTotalPrimas() {
+        const sumaCum = parseFloat(document.getElementById('totalCum3').value) || 0;
+        const sumaRce = parseFloat(document.getElementById('totalRCE3').value) || 0;
+    
+        const totalPrimas = sumaCum + sumaRce;
+    
+        document.getElementById('total3').value = totalPrimas;
+    }
+    
+    function recalcularTotales() {
+        calcularSumaCum();
+        calcularSumaRce();
+        calcularTotalPrimas(); // Sumar los totales de CUM y RCE
+    }
+    
+    garantiaSelects3.forEach((select, index) => {
+        select.addEventListener('change', function() {
+            recalcularTotales();
+        });
+    });
+    
+    document.addEventListener('DOMContentLoaded', recalcularTotales);
+
+/*
     function actualizarTotalPrima() {
         let totalPrima = 0;
         primaInputs3.forEach(input => {
@@ -341,9 +436,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const iva = parseFloat(ivaInput3.value) || 0;
         const total = totalPrima + gastosExpedicion + iva;
         totalConIvaInput3.value = total;
-    }
+    }*/
 
-    // Event Listeners para recalcular los valores
     // Eventos con debounce
     valorContratoInput3.addEventListener('input', validarValorContrato);
 

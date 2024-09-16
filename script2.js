@@ -177,10 +177,98 @@ document.addEventListener('DOMContentLoaded', function() {
             // Calcular la prima ajustada por el número de días en el año
             const prima = Math.round((valorGarantia * (tasa / 100)) * (dias / 365));
             primaInputs2[index].value = prima;
-            actualizarTotalPrima(); // Recalcular el total de la prima
         }
     }
 
+    function calcularSumaCum() {
+        let sumaCum = 0;
+        let algunaGarantiaSeleccionada = false;
+    
+        garantiaSelects2.forEach((select, index) => {
+            if (select.value !== 'responsabilidadCivil') {
+                const prima = parseFloat(primaInputs2[index].value) || 0;
+                if (prima > 0) {
+                    algunaGarantiaSeleccionada = true; // Verifica si alguna garantía tiene prima mayor a 0
+                }
+                sumaCum += prima;
+            }
+        });
+    
+        // Solo aplicar la prima mínima si hay alguna garantía seleccionada
+        if (algunaGarantiaSeleccionada && sumaCum < 80000) {
+            sumaCum = 80000;
+        }
+    
+        document.getElementById('sumaCum2').value = sumaCum;
+    
+        const ivaCum = Math.round(sumaCum * 0.19);
+        document.getElementById('ivaCum2').value = ivaCum;
+    
+        const gastosExpedicion = parseFloat(document.getElementById('gastosExpedicion2').value) || 0;
+        const totalCum = sumaCum + gastosExpedicion + ivaCum;
+        document.getElementById('totalCum2').value = totalCum;
+    }
+    
+    function calcularSumaRce() {
+        let sumaRce = 0;
+        let responsabilidadCivilSeleccionada = false;
+    
+        garantiaSelects2.forEach((select, index) => {
+            if (select.value === 'responsabilidadCivil') {
+                const prima = parseFloat(primaInputs2[index].value) || 0;
+                if (prima > 0) {
+                    responsabilidadCivilSeleccionada = true; // Verifica si responsabilidad civil está seleccionada con prima mayor a 0
+                }
+                sumaRce += prima;
+            }
+        });
+    
+        // Solo aplicar la prima mínima si 'Responsabilidad Civil' está seleccionada
+        if (responsabilidadCivilSeleccionada && sumaRce < 80000) {
+            sumaRce = 80000;
+        }
+    
+        document.getElementById('sumaRCE2').value = sumaRce;
+    
+        const ivaRce = Math.round(sumaRce * 0.19);
+        document.getElementById('ivaRCE2').value = ivaRce;
+    
+        let gastosExpedicionRce = 0;
+
+        // Solo agregar los 10,000 de gastos de expedición si 'Responsabilidad Civil' está seleccionada
+        if (responsabilidadCivilSeleccionada) {
+            gastosExpedicionRce = 10000; // Valor fijo de 10,000
+        }
+    
+        const totalRce = sumaRce + gastosExpedicionRce + ivaRce;
+        document.getElementById('totalRCE2').value = totalRce;
+    }
+    
+    
+    function calcularTotalPrimas() {
+        const sumaCum = parseFloat(document.getElementById('totalCum2').value) || 0;
+        const sumaRce = parseFloat(document.getElementById('totalRCE2').value) || 0;
+    
+        const totalPrimas = sumaCum + sumaRce;
+    
+        document.getElementById('total2').value = totalPrimas;
+    }
+    
+    function recalcularTotales() {
+        calcularSumaCum();
+        calcularSumaRce();
+        calcularTotalPrimas(); // Sumar los totales de CUM y RCE
+    }
+    
+    garantiaSelects2.forEach((select, index) => {
+        select.addEventListener('change', function() {
+            recalcularTotales();
+        });
+    });
+    
+    document.addEventListener('DOMContentLoaded', recalcularTotales);
+
+/*
     function actualizarTotalPrima() {
         let totalPrima = 0;
         primaInputs2.forEach(input => {
@@ -226,9 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const iva = parseFloat(ivaInput2.value) || 0;
         const total = totalPrima + gastosExpedicion + iva;
         totalConIvaInput2.value = total;
-    }
-    
-    // Event Listeners para recalcular los valores
+    }*/    
 
     // Eventos con debounce
     valorContratoInput2.addEventListener('input', validarValorContrato);
