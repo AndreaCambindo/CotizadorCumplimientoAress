@@ -292,6 +292,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Calcular la prima ajustada por el número de días en el año
             const prima = Math.round((valorGarantia * (tasa / 100)) * (dias / 365));
             primaInputs3[index].value = prima;
+
+            calcularSumaCum();
         }
     }
 
